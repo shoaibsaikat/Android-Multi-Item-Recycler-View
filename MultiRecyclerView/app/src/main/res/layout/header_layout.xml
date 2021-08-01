@@ -8,10 +8,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/holo_purple"
         android:paddingLeft="10sp"
         android:text="Header"
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textColor="@android:color/white"
+        android:textSize="34sp" />
 </LinearLayout>

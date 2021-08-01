@@ -12,12 +12,6 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter {
 
-    private enum ItemType {
-        HEADER,
-        SWITCH,
-        TEXT
-    }
-
     public class ItemData {
         public ItemType type;
         public String title;
@@ -30,6 +24,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
         }
     }
 
+    private enum ItemType {
+        HEADER,
+        SWITCH,
+        TEXT
+    }
     private Context context;
     private List<ItemData> items;
 
@@ -37,8 +36,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
         this.context = context;
 
         items = new ArrayList<ItemData>();
-        items.add(new ItemData(ItemType.HEADER, "Items with a choice", ""));
-        items.add(new ItemData(ItemType.SWITCH, "Your Choice", ""));
+        items.add(new ItemData(ItemType.HEADER, "Item List", ""));
+        items.add(new ItemData(ItemType.SWITCH, "Choice Item", ""));
         items.add(new ItemData(ItemType.TEXT, "Item 1", "1"));
         items.add(new ItemData(ItemType.TEXT, "Item 2", "2"));
         items.add(new ItemData(ItemType.TEXT, "Item 3", "3"));
@@ -49,11 +48,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         if (viewType == ItemType.HEADER.ordinal()) {
             return new HeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.header_layout, parent, false));
         } else if (viewType == ItemType.SWITCH.ordinal()) {
-            return new SwitchViewHolder(LayoutInflater.from(context).inflate(R.layout.switch_layout, parent, false));
+            return new SwitchViewHolder(LayoutInflater.from(context).inflate(R.layout.switch_layout, parent, false), context);
         } else {
             return new ListViewHolder(LayoutInflater.from(context).inflate(R.layout.list_layout, parent, false), context);
         }
@@ -61,21 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-        ItemData data = items.get(position);
-        ((IRecyclerViewHolder) holder).setData(data);
-
-        if (data.type == ItemType.HEADER) {
-            HeaderViewHolder h = (HeaderViewHolder) holder;
-            h.tvHeader.setText(data.title);
-        } else if (data.type == ItemType.SWITCH) {
-            SwitchViewHolder h = (SwitchViewHolder) holder;
-            h.swToggle.setText(data.title);
-        } else {
-            ListViewHolder h = (ListViewHolder) holder;
-            h.tvTitle.setText(data.title);
-            h.tvSubtitle.setText(data.subTitle);
-        }
+        ((IRecyclerViewHolder) holder).setData(items.get(position));
     }
 
     @Override
