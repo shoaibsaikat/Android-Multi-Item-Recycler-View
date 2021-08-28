@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter {
 
-    public class ItemData {
+    public static class ItemData {
         public ItemType type;
         public String title;
         public String subTitle;
